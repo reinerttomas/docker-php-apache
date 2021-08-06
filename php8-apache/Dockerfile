@@ -1,7 +1,9 @@
 FROM php:8.0-apache
 
 RUN apt-get update \
-    && apt-get -y --no-install-recommends install unzip
+    && apt-get -y --no-install-recommends install unzip \
+    && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime \
+    && echo $TZ > /etc/timezone
 
 # https://github.com/mlocati/docker-php-extension-installer
 ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
